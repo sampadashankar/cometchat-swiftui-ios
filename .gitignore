@@ -1,0 +1,107 @@
+########################
+# macOS
+########################
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+._*
+
+########################
+# Xcode / Swift
+########################
+
+## Build artifacts
+DerivedData/
+build/
+*.o
+*.LinkFileList
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+## User-specific settings
+*.xcuserstate
+*.xcuserdata/
+*.xcworkspace
+xcuserdata/
+*.xcscmblueprint
+
+## Swift & Obj-C
+*.swp
+*.moved-aside
+*.xccheckout
+*.xcuserdatad
+*.hmap
+
+########################
+# Swift Package Manager
+########################
+.build/
+.swiftpm/
+Package.resolved
+Packages/
+
+########################
+# CocoaPods (if ever used in SampleApp)
+########################
+Pods/
+
+########################
+# Carthage (if used)
+########################
+Carthage/
+Carthage/Build/
+
+########################
+# Playgrounds
+########################
+timeline.xctimeline
+playground.xcworkspace
+
+########################
+# Logs & Reports
+########################
+*.log
+report.xml
+result.json
+
+########################
+# Fastlane (if ever used later)
+########################
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+########################
+# Localization
+########################
+*.stringsdict
+*.xcassets/*.generated.swift
+
+########################
+# Temporary & Backup Files
+########################
+*.orig
+*.tmp
+*~
+*.bak
+*.swp
+
+########################
+# SampleApp Specific
+########################
+Sample\ App/DerivedData/
+Sample\ App/Pods/
+Sample\ App/build/
+
+########################
+Environment
+########################
+- .env
+- .env.*
+
