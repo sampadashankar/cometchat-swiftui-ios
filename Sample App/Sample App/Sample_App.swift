@@ -24,9 +24,9 @@ struct Sample_App: App {
                 }
                 .onAppear {
                     chatService.initialize(
-                        appId: "YOUR_REAL_APP_ID",
-                        region: "YOUR_REAL_REGION",
-                        authKey: "YOUR_REAL_AUTH_KEY"
+                        appId: "YOUR_APP_ID",
+                        region: "YOUR_REGION",
+                        authKey: "YOUR_AUTH_KEY"
                     ) { success in
                         isReady = success
                     }

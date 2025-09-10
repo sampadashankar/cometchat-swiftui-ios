@@ -8,12 +8,6 @@
 import Foundation
 import SwiftUI
 
-fileprivate let timeFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "hh:mm a"
-    return formatter
-}()
-
 struct ConversationRowView: View {
     let conversation: Conversation
     @Environment(\.cometChatTheme) private var theme
@@ -47,7 +41,7 @@ struct ConversationRowView: View {
                 
                 VStack {
                     if let lastActive = conversation.lastActiveTime {
-                        Text(timeFormatter.string(from: lastActive))
+                        Text(DateFormatter.chatTime.string(from: conversation.lastActiveTime ?? Date()))
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.gray)
                     }

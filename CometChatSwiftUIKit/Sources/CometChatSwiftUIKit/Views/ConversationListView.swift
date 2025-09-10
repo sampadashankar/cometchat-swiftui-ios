@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUI
 
 public struct ConversationListView: View {
     
@@ -30,7 +29,7 @@ public struct ConversationListView: View {
                         ForEach(viewModel.conversations) { conversation in
                             ConversationRowView(conversation: conversation)
                             Divider()
-                                .padding(.leading, 70) // offset to avoid crossing avatar
+                                .padding(.leading, 70) 
                         }
                     }
                 }
