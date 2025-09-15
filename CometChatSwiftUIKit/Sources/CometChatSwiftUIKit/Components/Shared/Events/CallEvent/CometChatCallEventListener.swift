@@ -1,5 +1,5 @@
 //
-//  /CometChatCallEventListener.swift
+//  CometChatCallEventListener.swift
 //  CometChatSwiftUIKit
 //
 //  Created by Sampada Shankar on 11/09/25.
