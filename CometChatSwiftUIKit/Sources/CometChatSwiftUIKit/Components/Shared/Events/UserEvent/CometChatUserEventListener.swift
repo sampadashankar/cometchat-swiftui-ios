@@ -26,12 +26,12 @@ public final class CometChatUserEventListener: ObservableObject {
     
     // MARK: - Public Event Triggers
     public func ccUserBlocked(user: CCUser) {
-        self.blockedUser = user
+        blockedUser = user
         onUserBlocked?(user)
     }
     
     public func ccUserUnblocked(user: CCUser) {
-        self.unblockedUser = user
+        unblockedUser = user
         onUserUnblocked?(user)
     }
     

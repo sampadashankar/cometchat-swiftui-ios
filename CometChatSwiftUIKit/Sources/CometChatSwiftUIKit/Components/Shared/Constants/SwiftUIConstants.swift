@@ -122,3 +122,9 @@ public enum GroupMemberScope: String {
 public enum SelectionMode {
     case single, multiple, none
 }
+
+
+public enum UsersListenerConstants {
+    static let userListener = "users-user-listener"
+    
+}
