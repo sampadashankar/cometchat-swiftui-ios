@@ -24,7 +24,6 @@ final class UsersViewModel: ObservableObject {
     private var userRequest: UsersRequest?
     private var filterUserRequest: UsersRequest?
     
-    // Refresh state
     @Published var isRefresh: Bool = false {
         didSet {
             if isRefresh {
@@ -45,11 +44,12 @@ final class UsersViewModel: ObservableObject {
     func fetchUsers() {
         if isRefresh {
             isFetchedAll = false
-            userRequestBuilder = UsersBuilder.getDefaultRequestBuilder()
-            userRequest = userRequestBuilder.build()
+            // reset builder safely
+            self.userRequestBuilder = UsersBuilder.getDefaultRequestBuilder()
+            self.userRequest = userRequestBuilder.build()
         }
         
-        guard let userRequest = userRequest, !isFetchedAll else { return }
+        guard let userRequest, !isFetchedAll else { return }
         
         isFetching = true
         
@@ -67,9 +67,9 @@ final class UsersViewModel: ObservableObject {
                             self.isRefresh = false
                         }
                         self.isFetchedAll = fetchedUsers.count < userRequest.limit
+                        self.groupUsers(users: fetchedUsers)
                     }
                     self.isFetching = false
-                    self.groupUsers(users: fetchedUsers)
                     
                 case .failure(let error):
                     self.error = error
@@ -102,14 +102,13 @@ final class UsersViewModel: ObservableObject {
         var staticUsers = self.users
         for user in users {
             let lastChar = staticUsers.last?.first?.name?.first
-            
-            if let lastChar, user.name?.first?.lowercased() == lastChar.lowercased() {
+            if let lastChar,
+               user.name?.first?.lowercased() == lastChar.lowercased() {
                 staticUsers[staticUsers.count - 1].append(user)
             } else {
                 staticUsers.append([user])
             }
         }
-        
         self.users = staticUsers
     }
     
@@ -168,3 +167,4 @@ final class UsersViewModel: ObservableObject {
         isConnected = false
     }
 }
+
