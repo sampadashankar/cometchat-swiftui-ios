@@ -8,15 +8,13 @@
 import Foundation
 import CometChatSDK
 
-
+// Provide user presence updates.
 extension UsersViewModel: @MainActor CometChatUserDelegate {
-    
-    
     public func onUserOnline(user: User) {
+        // Mark the user online and update list.
         user.status = .online
         update(user: user)
     }
-    
     
     public func onUserOffline(user: User) {
         user.status = .offline

@@ -33,6 +33,7 @@ final class UsersViewModel: ObservableObject {
         }
     }
     
+    private let listenerID = "UsersViewModelListener"
     private var isConnected = false
     
     init(userRequestBuilder: UsersRequest.UsersRequestBuilder) {
@@ -157,15 +158,13 @@ final class UsersViewModel: ObservableObject {
     // MARK: - Listeners
     func connect() {
         guard !isConnected else { return }
-        CometChat.addUserListener(UsersListenerConstants.userListener, self)
-        CometChatUserEvents.shared.addListener(self)
+        CometChat.addUserListener(listenerID, self)
         isConnected = true
     }
     
     func disconnect() {
         guard isConnected else { return }
-        CometChat.removeUserListener(UsersListenerConstants.userListener)
-        CometChatUserEvents.shared.removeListener(self)
+        CometChat.removeUserListener(listenerID)
         isConnected = false
     }
 }
