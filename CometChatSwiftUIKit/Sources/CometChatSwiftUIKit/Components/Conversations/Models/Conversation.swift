@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Conversation: Identifiable {
+public struct Conversation: Identifiable, Sendable {
     public let id: UUID = UUID()
     public let name: String
     public let lastMessage: String?
