@@ -9,7 +9,7 @@ import Foundation
 import CometChatSDK
 
 @MainActor
-final class UsersViewModel: ObservableObject, CometChatUserDelegate {
+final class UsersViewModel: ObservableObject {
     
     @Published var users: [[User]] = []
     @Published var searchedUsers: [User] = []
@@ -32,6 +32,8 @@ final class UsersViewModel: ObservableObject, CometChatUserDelegate {
             }
         }
     }
+    
+    private var isConnected = false
     
     init(userRequestBuilder: UsersRequest.UsersRequestBuilder) {
         self.userRequestBuilder = userRequestBuilder
@@ -154,12 +156,16 @@ final class UsersViewModel: ObservableObject, CometChatUserDelegate {
     
     // MARK: - Listeners
     func connect() {
-        // Adding user listener using CometChat SDK
+        guard !isConnected else { return }
         CometChat.addUserListener(UsersListenerConstants.userListener, self)
+        CometChatUserEvents.shared.addListener(self)
+        isConnected = true
     }
     
     func disconnect() {
-        // Removing user listener using CometChat SDK
+        guard isConnected else { return }
         CometChat.removeUserListener(UsersListenerConstants.userListener)
+        CometChatUserEvents.shared.removeListener(self)
+        isConnected = false
     }
 }

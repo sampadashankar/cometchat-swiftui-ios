@@ -10,39 +10,22 @@ import CometChatSDK
 
 public typealias CCUser = CometChatSDK.User
 
-@MainActor
-public final class CometChatUserEventListener: ObservableObject {
-    
-    // MARK: - Published state for UI binding
-    @Published public private(set) var blockedUser: CCUser?
-    @Published public private(set) var unblockedUser: CCUser?
-    
-    // MARK: - Closures for callbacks
-    public var onUserBlocked: ((CCUser) -> Void)?
-    public var onUserUnblocked: ((CCUser) -> Void)?
-    
-    // MARK: - Initializer
-    public init() {}
-    
-    // MARK: - Public Event Triggers
-    public func ccUserBlocked(user: CCUser) {
-        blockedUser = user
-        onUserBlocked?(user)
-    }
-    
-    public func ccUserUnblocked(user: CCUser) {
-        unblockedUser = user
-        onUserUnblocked?(user)
-    }
-    
-    // MARK: - Deprecated methods (wrapped for compatibility)
+public protocol CometChatUserEventListener: AnyObject {
+    // Primary callbacks
+    func ccUserBlocked(user: CCUser)
+    func ccUserUnblocked(user: CCUser)
+    // Deprecated legacy naming (will forward to new callbacks)
     @available(*, deprecated, message: "Use ccUserBlocked(user:) instead")
-    public func onUserBlock(user: CCUser) {
-        ccUserBlocked(user: user)
-    }
-    
+    func onUserBlock(user: CCUser)
     @available(*, deprecated, message: "Use ccUserUnblocked(user:) instead")
-    public func onUserUnblock(user: CCUser) {
-        ccUserUnblocked(user: user)
-    }
+    func onUserUnblock(user: CCUser)
 }
+
+// MARK: - Default no-op implementations
+public extension CometChatUserEventListener {
+    func ccUserBlocked(user: CCUser) {}
+    func ccUserUnblocked(user: CCUser) {}
+    func onUserBlock(user: CCUser) { ccUserBlocked(user: user) }
+    func onUserUnblock(user: CCUser) { ccUserUnblocked(user: user) }
+}
+
