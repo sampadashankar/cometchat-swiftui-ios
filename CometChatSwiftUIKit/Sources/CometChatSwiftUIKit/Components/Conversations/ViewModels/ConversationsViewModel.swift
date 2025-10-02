@@ -17,8 +17,8 @@ final class ConversationsViewModel: ObservableObject, @MainActor CometChatUserDe
     
     // MARK: - Published Properties
     @Published var conversations: [CometChatSDK.Conversation] = []
-    @Published var filteredConversations: [Conversation] = []
-    @Published var selectedConversations: [Conversation] = []
+    @Published var filteredConversations: [CometChatSDK.Conversation] = []
+    @Published var selectedConversations: [CometChatSDK.Conversation] = []
     @Published var isFetching: Bool = false
     @Published var error: CometChatException?
     @Published var isTyping: Bool = false

@@ -14,14 +14,14 @@ import CometChatSDK
 public final class CometChatConversationEventListener: ObservableObject {
     
     // MARK: - Published state for UI
-    @Published public private(set) var lastConversation: Conversation?
+    @Published public private(set) var lastConversation: CometChatSDK.Conversation?
     @Published public private(set) var lastEvent: String = ""
     
     // MARK: - Closures for event handling
-    public var onConversationDeleted: ((Conversation) -> Void)?
+    public var onConversationDeleted: ((CometChatSDK.Conversation) -> Void)?
     
     // MARK: - Deprecated Closures (for migration)
-    public var onConversationDeleteLegacy: ((Conversation) -> Void)?
+    public var onConversationDeleteLegacy: ((CometChatSDK.Conversation) -> Void)?
     public var onStartConversationClickLegacy: (() -> Void)?
     
     // MARK: - Singleton-style shared instance
@@ -30,7 +30,7 @@ public final class CometChatConversationEventListener: ObservableObject {
     private init() {}
     
     // MARK: - Modern Event
-    public func ccConversationDeleted(conversation: Conversation) {
+    public func ccConversationDeleted(conversation: CometChatSDK.Conversation) {
         lastConversation = conversation
         lastEvent = "Conversation Deleted"
         onConversationDeleted?(conversation)
@@ -38,7 +38,7 @@ public final class CometChatConversationEventListener: ObservableObject {
     
     // MARK: - Deprecated Events
     @available(*, deprecated, message: "Use `ccConversationDeleted(conversation:)` instead")
-    public func emitOnConversationDelete(conversation: Conversation) {
+    public func emitOnConversationDelete(conversation: CometChatSDK.Conversation) {
         lastConversation = conversation
         lastEvent = "Conversation Deleted (Deprecated)"
         onConversationDeleteLegacy?(conversation)

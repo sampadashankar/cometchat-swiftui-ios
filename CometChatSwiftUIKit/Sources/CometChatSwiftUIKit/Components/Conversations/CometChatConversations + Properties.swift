@@ -14,30 +14,30 @@ import CometChatSDK
 class CometChatConversationsViewModel: ObservableObject {
     
 
-    @Published var conversations: [Conversation] = []
-    @Published var selectedConversations: [Conversation] = []
+    @Published var conversations: [CometChatSDK.Conversation] = []
+    @Published var selectedConversations: [CometChatSDK.Conversation] = []
     @Published var error: CometChatException?
     
 
-    var onItemClick: ((_ conversation: Conversation, _ index: Int) -> Void)?
-    var onItemLongClick: ((_ conversation: Conversation, _ index: Int) -> Void)?
-    var onSelection: ((_ conversations: [Conversation]) -> Void)?
-    var onLoad: ((_ conversations: [Conversation]) -> Void)?
+    var onItemClick: ((_ conversation: CometChatSDK.Conversation, _ index: Int) -> Void)?
+    var onItemLongClick: ((_ conversation: CometChatSDK.Conversation, _ index: Int) -> Void)?
+    var onSelection: ((_ conversations: [CometChatSDK.Conversation]) -> Void)?
+    var onLoad: ((_ conversations: [CometChatSDK.Conversation]) -> Void)?
     var onEmpty: (() -> Void)?
     
 
     var textFormatters: [CometChatTextFormatter] = []
-    var datePattern: ((_ conversation: Conversation) -> String)?
-    var options: ((_ conversation: Conversation?) -> [CometChatConversationOption])?
-    var addOptions: ((_ conversation: Conversation?) -> [CometChatConversationOption])?
+    var datePattern: ((_ conversation: CometChatSDK.Conversation) -> String)?
+    var options: ((_ conversation: CometChatSDK.Conversation?) -> [CometChatConversationOption])?
+    var addOptions: ((_ conversation: CometChatSDK.Conversation?) -> [CometChatConversationOption])?
     var customSoundForMessages: URL?
     
 
-    var listItemView: ((_ conversation: Conversation) -> AnyView)?
-    var trailingView: ((_ conversation: Conversation) -> AnyView)?
-    var subtitleView: ((_ conversation: Conversation) -> AnyView)?
-    var leadingView: ((_ conversation: Conversation) -> AnyView)?
-    var titleView: ((_ conversation: Conversation) -> AnyView)?
+    var listItemView: ((_ conversation: CometChatSDK.Conversation) -> AnyView)?
+    var trailingView: ((_ conversation: CometChatSDK.Conversation) -> AnyView)?
+    var subtitleView: ((_ conversation: CometChatSDK.Conversation) -> AnyView)?
+    var leadingView: ((_ conversation: CometChatSDK.Conversation) -> AnyView)?
+    var titleView: ((_ conversation: CometChatSDK.Conversation) -> AnyView)?
     
 
     private var conversationRequestBuilder: ConversationRequest.ConversationRequestBuilder?
@@ -52,25 +52,25 @@ class CometChatConversationsViewModel: ObservableObject {
     
 
     @discardableResult
-    func setOnItemClick(_ action: @escaping (Conversation, Int) -> Void) -> Self {
+    func setOnItemClick(_ action: @escaping (CometChatSDK.Conversation, Int) -> Void) -> Self {
         self.onItemClick = action
         return self
     }
     
     @discardableResult
-    func setOnItemLongClick(_ action: @escaping (Conversation, Int) -> Void) -> Self {
+    func setOnItemLongClick(_ action: @escaping (CometChatSDK.Conversation, Int) -> Void) -> Self {
         self.onItemLongClick = action
         return self
     }
     
     @discardableResult
-    func setOnSelection(_ action: @escaping ([Conversation]) -> Void) -> Self {
+    func setOnSelection(_ action: @escaping ([CometChatSDK.Conversation]) -> Void) -> Self {
         self.onSelection = action
         return self
     }
     
     @discardableResult
-    func setOnLoad(_ action: @escaping ([Conversation]) -> Void) -> Self {
+    func setOnLoad(_ action: @escaping ([CometChatSDK.Conversation]) -> Void) -> Self {
         self.onLoad = action
         return self
     }
@@ -89,19 +89,19 @@ class CometChatConversationsViewModel: ObservableObject {
     }
     
     @discardableResult
-    func setDatePattern(_ pattern: @escaping (Conversation) -> String) -> Self {
+    func setDatePattern(_ pattern: @escaping (CometChatSDK.Conversation) -> String) -> Self {
         self.datePattern = pattern
         return self
     }
     
     @discardableResult
-    func setOptions(_ options: @escaping (Conversation?) -> [CometChatConversationOption]) -> Self {
+    func setOptions(_ options: @escaping (CometChatSDK.Conversation?) -> [CometChatConversationOption]) -> Self {
         self.options = options
         return self
     }
     
     @discardableResult
-    func addOptions(_ options: @escaping (Conversation?) -> [CometChatConversationOption]) -> Self {
+    func addOptions(_ options: @escaping (CometChatSDK.Conversation?) -> [CometChatConversationOption]) -> Self {
         self.addOptions = options
         return self
     }
@@ -114,31 +114,31 @@ class CometChatConversationsViewModel: ObservableObject {
     
     // MARK: - SwiftUI View setters
     @discardableResult
-    func setListItemView<Content: View>(_ view: @escaping (Conversation) -> Content) -> Self {
+    func setListItemView<Content: View>(_ view: @escaping (CometChatSDK.Conversation) -> Content) -> Self {
         self.listItemView = { conversation in AnyView(view(conversation)) }
         return self
     }
     
     @discardableResult
-    func setTrailingView<Content: View>(_ view: @escaping (Conversation) -> Content) -> Self {
+    func setTrailingView<Content: View>(_ view: @escaping (CometChatSDK.Conversation) -> Content) -> Self {
         self.trailingView = { conversation in AnyView(view(conversation)) }
         return self
     }
     
     @discardableResult
-    func setSubtitleView<Content: View>(_ view: @escaping (Conversation) -> Content) -> Self {
+    func setSubtitleView<Content: View>(_ view: @escaping (CometChatSDK.Conversation) -> Content) -> Self {
         self.subtitleView = { conversation in AnyView(view(conversation)) }
         return self
     }
     
     @discardableResult
-    func setLeadingView<Content: View>(_ view: @escaping (Conversation) -> Content) -> Self {
+    func setLeadingView<Content: View>(_ view: @escaping (CometChatSDK.Conversation) -> Content) -> Self {
         self.leadingView = { conversation in AnyView(view(conversation)) }
         return self
     }
     
     @discardableResult
-    func setTitleView<Content: View>(_ view: @escaping (Conversation) -> Content) -> Self {
+    func setTitleView<Content: View>(_ view: @escaping (CometChatSDK.Conversation) -> Content) -> Self {
         self.titleView = { conversation in AnyView(view(conversation)) }
         return self
     }
@@ -149,18 +149,18 @@ class CometChatConversationsViewModel: ObservableObject {
         self.conversationRequest = builder.build()
     }
     
-    func insert(conversation: Conversation, at index: Int = 0) {
+    func insert(conversation: CometChatSDK.Conversation, at index: Int = 0) {
         conversations.insert(conversation, at: index)
     }
     
-    func update(conversation: Conversation) {
-        if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
+    func update(conversation: CometChatSDK.Conversation) {
+        if let index = conversations.firstIndex(where: { $0.conversationId == conversation.conversationId }) {
             conversations[index] = conversation
         }
     }
     
-    func remove(conversation: Conversation) {
-        if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
+    func remove(conversation: CometChatSDK.Conversation) {
+        if let index = conversations.firstIndex(where: { $0.conversationId == conversation.conversationId }) {
             conversations.remove(at: index)
         }
     }
