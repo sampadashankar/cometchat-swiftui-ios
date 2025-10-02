@@ -14,11 +14,11 @@ public struct UsersShimmerView: View {
     /// Number of shimmer cells to show
     public var cellCount: Int = 20
     
-    /// Gradient colors for shimmer
+
     public var colorGradient1: Color = Color.gray.opacity(0.3)
     public var colorGradient2: Color = Color.gray.opacity(0.1)
     
-    /// Start/stop shimmer
+
     @Binding public var isShimmering: Bool
     
     public init(cellCount: Int = 20, isShimmering: Binding<Bool>, colorGradient1: Color = Color.gray.opacity(0.3), colorGradient2: Color = Color.gray.opacity(0.1)) {

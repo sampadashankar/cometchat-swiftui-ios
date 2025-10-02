@@ -5,6 +5,7 @@
 //  Created by Sampada Shankar on 18/09/25.
 //
 
+
 import Foundation
 import CometChatSDK
 
@@ -40,7 +41,7 @@ final class UsersViewModel: ObservableObject {
         self.userRequest = userRequestBuilder.build()
     }
     
-    // MARK: - API Calls
+
     func fetchUsers() {
         if isRefresh {
             isFetchedAll = false
@@ -97,7 +98,7 @@ final class UsersViewModel: ObservableObject {
         }
     }
     
-    // MARK: - Helpers
+
     private func groupUsers(users: [User]) {
         var staticUsers = self.users
         for user in users {
@@ -123,7 +124,7 @@ final class UsersViewModel: ObservableObject {
         return nil
     }
     
-    // MARK: - User Management
+
     func add(user: User) {
         if !users.flatMap({ $0 }).contains(where: { $0.uid == user.uid }) {
             if users.isEmpty {
@@ -154,7 +155,7 @@ final class UsersViewModel: ObservableObject {
         users.count
     }
     
-    // MARK: - Listeners
+
     func connect() {
         guard !isConnected else { return }
         CometChat.addUserListener(listenerID, self)

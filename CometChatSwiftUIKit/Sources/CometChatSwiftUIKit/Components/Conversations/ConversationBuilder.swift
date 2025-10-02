@@ -1,27 +1,26 @@
 //  ConversationBuilder.swift
 //  CometChatSwiftUIKit
 //
-//  Created to replace missing / buggy prior implementation that triggered
-//  concurrency warnings and type mismatch errors.
+//  Created by Sampada Shankar on 22/09/25.
 //
 
 import Foundation
-#if canImport(CometChatSDK)
-import CometChatSDK
-#endif
 
-// MARK: - Result Type (Sendable)
+import CometChatSDK
+
+
+
 public enum ConversationBuilderResult: Sendable {
     case success([Conversation])
     case failure(Error)
 }
 
-// Provide Sendable conformance for the SDK exception type (not declared Sendable upstream).
-#if canImport(CometChatSDK)
-extension CometChatException: @unchecked Sendable { }
-#endif
 
-// MARK: - ConversationBuilder
+
+extension CometChatException: @unchecked Sendable { }
+
+
+
 public final class ConversationBuilder: @unchecked Sendable {
     public static let shared = ConversationBuilder()
     private init() {}
