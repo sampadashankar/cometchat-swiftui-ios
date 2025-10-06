@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import CometChatSDK
 
 public struct ConversationListView: View {
     
-    @StateObject private var viewModel = ConversationListViewModel()
+    @StateObject private var viewModel = ConversationsViewModel()
     
     public init() {}
     
@@ -26,20 +27,30 @@ public struct ConversationListView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.conversations) { conversation in
-                            ConversationRowView(conversation: conversation)
+                        ForEach(viewModel.conversations, id: \.conversationId) { conversation in
+                            NavigationLink(value: conversation) {
+                                ConversationRowView(conversation: conversation)
+                            }
                             Divider()
-                                .padding(.leading, 70) 
+                                .padding(.leading, 70)
                         }
                     }
                 }
                 .background(Color(.systemBackground))
+                .refreshable {
+                    await viewModel.fetchConversations(isRefresh: true)
+                }
+                .task {
+                    await viewModel.fetchConversations()
+                }
+            }
+            .navigationDestination(for: CometChatSDK.Conversation.self) { conversation in
+                // TODO: Navigate to the Chat message screen
             }
             .navigationBarHidden(true)
         }
     }
 }
-
 
 #Preview {
     ConversationListView()

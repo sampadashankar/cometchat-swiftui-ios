@@ -7,9 +7,10 @@
 
 import Foundation
 import SwiftUI
+import CometChatSDK
 
 struct ConversationRowView: View {
-    let conversation: Conversation
+    let conversation: CometChatSDK.Conversation
     @Environment(\.cometChatTheme) private var theme
     
     var body: some View {
