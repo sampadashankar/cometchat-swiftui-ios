@@ -27,7 +27,7 @@ public struct ConversationListView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.conversations, id: \.conversationId) { conversation in
+                        ForEach(viewModel.conversations, id: \.self) { conversation in
                             NavigationLink(value: conversation) {
                                 ConversationRowView(conversation: conversation)
                             }
@@ -45,7 +45,7 @@ public struct ConversationListView: View {
                 }
             }
             .navigationDestination(for: CometChatSDK.Conversation.self) { conversation in
-                // TODO: Navigate to the Chat message screen
+                // TODO: Replace with Chat message screen when implemented
             }
             .navigationBarHidden(true)
         }
