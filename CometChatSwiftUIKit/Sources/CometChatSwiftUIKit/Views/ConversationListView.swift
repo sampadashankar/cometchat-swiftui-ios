@@ -38,10 +38,10 @@ public struct ConversationListView: View {
                 }
                 .background(Color(.systemBackground))
                 .refreshable {
-                    await viewModel.fetchConversations(isRefresh: true)
+                    viewModel.fetchConversations(isRefresh: true)
                 }
                 .task {
-                    await viewModel.fetchConversations()
+                    viewModel.fetchConversations()
                 }
             }
             .navigationDestination(for: CometChatSDK.Conversation.self) { conversation in
