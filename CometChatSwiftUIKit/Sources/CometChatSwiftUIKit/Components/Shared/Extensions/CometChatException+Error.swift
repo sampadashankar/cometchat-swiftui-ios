@@ -8,5 +8,5 @@
 import Foundation
 import CometChatSDK
 
-// Allow using CometChatException directly as the failure type in Result and throws.
-extension CometChatException: Error {}
+
+extension CometChatException: Error, @unchecked Sendable {}

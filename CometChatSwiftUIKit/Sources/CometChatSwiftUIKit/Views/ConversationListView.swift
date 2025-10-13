@@ -29,7 +29,7 @@ public struct ConversationListView: View {
                     LazyVStack(spacing: 0) {
                         ForEach(viewModel.conversations, id: \.self) { conversation in
                             NavigationLink(value: conversation) {
-                                ConversationRowView(conversation: conversation)
+                                //ConversationRowView(conversation: conversation)
                             }
                             Divider()
                                 .padding(.leading, 70)

@@ -10,7 +10,7 @@ import SwiftUI
 import CometChatSDK
 
 struct ConversationRowView: View {
-    let conversation: CometChatSDK.Conversation
+    let conversation: Conversation
     @Environment(\.cometChatTheme) private var theme
     
     var body: some View {
@@ -18,9 +18,11 @@ struct ConversationRowView: View {
             HStack(spacing: 12) {
                 
                 // MARK: Avatar
-                ConversationAvatarView(avatarURL: conversation.avatarURL, size: 48)
+                //ConversationAvatarView(avatarURL: conversation.avatarURL, size: 48)
                 
                 // MARK: Name & Last Message
+                
+                
                 VStack(alignment: .leading, spacing: 4) {
                     Text(conversation.name)
                         .font(CometChatTypography.font(for: .heading3, weight: .bold))

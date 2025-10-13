@@ -16,8 +16,9 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             if let user = chatService.currentUser {
-                Text("✅ Logged in as \(user.name ?? user.uid ?? "Unknown")")
-                    .foregroundColor(.green)
+                ConversationListView()
+//                Text("✅ Logged in as \(user.name ?? user.uid ?? "Unknown")")
+//                    .foregroundColor(.green)
 
                 
             } else {
