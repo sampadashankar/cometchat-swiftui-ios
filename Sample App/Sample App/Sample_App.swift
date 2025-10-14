@@ -26,7 +26,7 @@ struct Sample_App: App {
                     chatService.initialize(
                         appId: "YOUR_APP_ID",
                         region: "YOUR_REGION",
-                        authKey: "YOUR_AUTH_KEY"
+                        authKey: "‎YOUR_AUTH_KEY"
                     ) { success in
                         isReady = success
                     }

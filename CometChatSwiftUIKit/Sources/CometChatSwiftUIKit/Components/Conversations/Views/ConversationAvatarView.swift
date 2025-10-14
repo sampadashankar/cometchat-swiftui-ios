@@ -7,14 +7,16 @@
 
 import Foundation
 import SwiftUI
+import CometChatSDK
 
 struct ConversationAvatarView: View {
-    let avatarURL: String?
     let size: CGFloat
+    let user : CometChatSDK.User?
+    //let group : CometChatSDK.Group?
     
     var body: some View {
         Group {
-            if let avatarURL = avatarURL, let url = URL(string: avatarURL) {
+            if let avatarURL = user?.avatar , let url = URL(string: avatarURL) {
                 AsyncImage(url: url) { phase in
                     switch phase {
                     case .empty:

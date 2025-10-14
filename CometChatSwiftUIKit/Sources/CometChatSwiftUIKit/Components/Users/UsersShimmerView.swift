@@ -11,7 +11,6 @@ import SwiftUI
 
 public struct UsersShimmerView: View {
     
-    /// Number of shimmer cells to show
     public var cellCount: Int = 20
     
 

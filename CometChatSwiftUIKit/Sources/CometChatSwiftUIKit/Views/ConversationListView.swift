@@ -29,7 +29,7 @@ public struct ConversationListView: View {
                     LazyVStack(spacing: 0) {
                         ForEach(viewModel.conversations, id: \.self) { conversation in
                             NavigationLink(value: conversation) {
-                                //ConversationRowView(conversation: conversation)
+                                ConversationRowView(conversation: conversation)
                             }
                             Divider()
                                 .padding(.leading, 70)
@@ -37,17 +37,14 @@ public struct ConversationListView: View {
                     }
                 }
                 .background(Color(.systemBackground))
-                .refreshable {
-                    viewModel.fetchConversations(isRefresh: true)
-                }
-                .task {
-                    viewModel.fetchConversations()
-                }
             }
             .navigationDestination(for: CometChatSDK.Conversation.self) { conversation in
                 // TODO: Replace with Chat message screen when implemented
             }
             .navigationBarHidden(true)
+            .task {
+                viewModel.fetchConversations()
+            }
         }
     }
 }

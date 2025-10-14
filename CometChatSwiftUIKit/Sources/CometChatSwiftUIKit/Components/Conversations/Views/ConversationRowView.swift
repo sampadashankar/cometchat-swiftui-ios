@@ -10,7 +10,7 @@ import SwiftUI
 import CometChatSDK
 
 struct ConversationRowView: View {
-    let conversation: Conversation
+    let conversation: CometChatSDK.Conversation
     @Environment(\.cometChatTheme) private var theme
     
     var body: some View {
@@ -18,17 +18,17 @@ struct ConversationRowView: View {
             HStack(spacing: 12) {
                 
                 // MARK: Avatar
-                //ConversationAvatarView(avatarURL: conversation.avatarURL, size: 48)
+                //ConversationAvatarView(size: 48, user: <#T##User?#>, group: <#T##Group?#>)
                 
                 // MARK: Name & Last Message
                 
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(conversation.name)
+                    Text(conversation.stringValue())
                         .font(CometChatTypography.font(for: .heading3, weight: .bold))
                         .lineLimit(1)
                     
-                    if let lastMessage = conversation.lastMessage, !lastMessage.isEmpty {
+                    if let lastMessage = conversation.lastMessage?.description{
                         Text(lastMessage)
                             .font(CometChatTypography.font(for: .body, weight: .regular))
                             .foregroundColor(.gray)
@@ -43,8 +43,8 @@ struct ConversationRowView: View {
                 Spacer()
                 
                 VStack {
-                    if let lastActive = conversation.lastActiveTime {
-                        Text(DateFormatter.chatTime.string(from: conversation.lastActiveTime ?? Date()))
+                    if let lastActive = conversation.lastMessage?.deliveredAt {
+                        Text( "\(conversation.lastMessage?.deliveredAt)")
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.gray)
                     }
@@ -52,8 +52,8 @@ struct ConversationRowView: View {
                     Spacer()
                     
                     // MARK: Unread Badge
-                    if conversation.unreadCount > 0 {
-                        Text("\(conversation.unreadCount)")
+                    if conversation.unreadMessageCount > 0 {
+                        Text("\(conversation.unreadMessageCount)")
                             .font(.system(size: 12, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 8)
@@ -69,6 +69,11 @@ struct ConversationRowView: View {
             .background(Color.clear)
         
         }
-        .buttonStyle(PlainButtonStyle()) 
+        .onAppear {
+            print(conversation.conversationWith?.description ?? "No description")
+        }
+        .buttonStyle(PlainButtonStyle())
     }
+        
 }
+   
