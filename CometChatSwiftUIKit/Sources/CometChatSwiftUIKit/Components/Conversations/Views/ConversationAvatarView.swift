@@ -12,10 +12,11 @@ import CometChatSDK
 struct ConversationAvatarView: View {
     let size: CGFloat
     let user : CometChatSDK.User?
-    //let group : CometChatSDK.Group?
+    let group : CometChatSDK.Group?
     
     var body: some View {
         Group {
+            //TODO: Check if it is a user or group conversation
             if let avatarURL = user?.avatar , let url = URL(string: avatarURL) {
                 AsyncImage(url: url) { phase in
                     switch phase {

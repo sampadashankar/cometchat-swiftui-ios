@@ -11,6 +11,9 @@ import CometChatSDK
 
 struct ConversationRowView: View {
     let conversation: CometChatSDK.Conversation
+    let user : CometChatSDK.User?
+    let group : CometChatSDK.Group?
+    
     @Environment(\.cometChatTheme) private var theme
     
     var body: some View {
@@ -19,8 +22,6 @@ struct ConversationRowView: View {
                 
                 // MARK: Avatar
                 //ConversationAvatarView(size: 48, user: <#T##User?#>, group: <#T##Group?#>)
-                
-                // MARK: Name & Last Message
                 
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -51,7 +52,6 @@ struct ConversationRowView: View {
                     
                     Spacer()
                     
-                    // MARK: Unread Badge
                     if conversation.unreadMessageCount > 0 {
                         Text("\(conversation.unreadMessageCount)")
                             .font(.system(size: 12, weight: .bold))
